@@ -67,6 +67,15 @@ async function run() {
       res.send(result);
     });
 
+//Remove task section
+app.delete("/viewTask/:taskId", async (req, res) => {
+  const taskId = req.params.taskId;
+  const idObject = new ObjectId(taskId);
+  console.log(taskId);
+  const result = await taskCollection.deleteOne({ _id: idObject });
+  res.send(result);
+});
+
 
 
     //update section
@@ -88,6 +97,7 @@ async function run() {
           Task_title: updateTask.Task_title,
           Task_Priority: updateTask.Task_Priority,
           Task_description: updateTask.Task_description,
+          Task_Deadline: updateTask.Task_Deadline,
           submitTime: updateTask.submitTime
         }
       }
